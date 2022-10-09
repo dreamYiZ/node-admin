@@ -51,7 +51,18 @@ app.use(
     algorithms: ["HS256"], //指定解析密文的算法
   }).unless({ path: ["/login", "/test", "/socket.io", "/favicon.ico"] })
 );
-
+// Routes
+app.get(`/`, (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'))
+})
+//测试
+app.get("/test", async (req, res, next) => {
+  res.json({
+    code: 200,
+    msg: "访问成功!",
+  });
+  next();
+});
 // 登录
 app.get("/login", async (req, res, next) => {
   let { username, password } = req.query;
@@ -82,7 +93,6 @@ app.get("/login", async (req, res, next) => {
   }
   next();
 });
-
 // 返回菜单列表
 app.get("/menu/query", async (req, res, next) => {
   res.json(db_menu.get("menu").value());
@@ -364,12 +374,15 @@ app.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
     res.status(401).send({ msg: "不合法的请求" });
   }
+  res.status(500).send('Internal Serverless Error')
   next();
 });
 
-const server = app.listen(8081, () => {
+// const host = '0.0.0.0';
+const port = 8081;
+const server = app.listen(port, () => {
   const host = null; // server.address().address
-  const port = server.address().port;
+  // const port = server.address().port;
   // console.log("应用实例，访问地址为 http://%s:%s", 'localhost', port)
   console.log(`server running @ http://${host ? host : "localhost"}:${port}`);
 });

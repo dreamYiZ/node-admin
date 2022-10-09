@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node app.js"
+    "build": "node app.js",
+    "dev": "NODE_ENV=development node app.js"
   },
   "author": "",
   "license": "ISC",
