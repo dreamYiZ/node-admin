@@ -49,12 +49,8 @@ app.use(
   expressJwt({
     secret: SECRET_KEY,
     algorithms: ["HS256"], //指定解析密文的算法
-  }).unless({ path: ["/login", "/test", "/socket.io", "/favicon.ico"] })
+  }).unless({ path: ["/login", "/test", "/socket.io","/menu/query", "/favicon.ico"] })
 );
-// Routes
-app.get(`/`, (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'))
-})
 //测试
 app.get("/test", async (req, res, next) => {
   res.json({
@@ -137,7 +133,7 @@ app.get("/menu/add", async (req, res, next) => {
 // 删除菜单 菜单id 数组
 app.get("/menu/delete", async (req, res, next) => {
   let { ids } = req.query;
-  if (ids?.length) {
+  if (ids.length) {
     ids.forEach((id) => {
       let parentNode = db_menu
         .get("menu")
@@ -259,6 +255,7 @@ app.get("/role/delete", async (req, res, next) => {
   }
   next();
 });
+
 // 设置角色的菜单
 app.get("/roleMenu/update", async (req, res, next) => {
   if (_.has(req.query, "checkedMenu", "halfCheckedMenu", "roleId")) {
