@@ -15,14 +15,7 @@
         "7b3c2013-5f52-4191-8080-e18641eda5df",
         "57c79357-0309-41b9-919a-253c3dfe6690",
         "7b3c2013-5f52-4191-8080-e18641eda5d1",
-        "34221911-5c1b-451b-933d-143b8cea20dd",
-        "86eee801-ffd1-4769-b09a-6a2a8a516af5",
-        "a88db623-810c-4ee6-834f-a292941dea86",
-        "53983958-5807-4bbc-9cc1-23412c776f8a",
-        "be63ff4f-0462-4171-bb65-cdd2ff052b31",
-        "26191e4f-4f67-4dcf-a1d3-d06f279ddb6e",
-        "8ba31b42-b46a-4424-a0de-a65a30928df7",
-        "ac3c5cdb-156e-49d0-923f-2bde14d795a3"
+        "34221911-5c1b-451b-933d-143b8cea20dd"
       ]
     },
     {
@@ -185,94 +178,6 @@
       "meta": {
         "title": "关于",
         "icon": "Warning",
-        "auth": [],
-        "modify": false
-      },
-      "children": []
-    },
-    {
-      "id": "86eee801-ffd1-4769-b09a-6a2a8a516af5",
-      "url": "/system2",
-      "path": "/system2",
-      "componentName": "System",
-      "meta": {
-        "title": "测试2",
-        "icon": "Folder",
-        "auth": [],
-        "modify": false
-      },
-      "children": []
-    },
-    {
-      "id": "a88db623-810c-4ee6-834f-a292941dea86",
-      "url": "/system3",
-      "path": "/system3",
-      "componentName": "System",
-      "meta": {
-        "title": "测试3",
-        "icon": "Folder",
-        "auth": [],
-        "modify": false
-      },
-      "children": []
-    },
-    {
-      "id": "53983958-5807-4bbc-9cc1-23412c776f8a",
-      "url": "/system4",
-      "path": "/system4",
-      "componentName": "System",
-      "meta": {
-        "title": "测试4",
-        "icon": "Folder",
-        "auth": [],
-        "modify": false
-      },
-      "children": []
-    },
-    {
-      "id": "be63ff4f-0462-4171-bb65-cdd2ff052b31",
-      "url": "/system5",
-      "path": "/system5",
-      "componentName": "System",
-      "meta": {
-        "title": "测试5",
-        "icon": "Folder",
-        "auth": []
-      },
-      "children": []
-    },
-    {
-      "id": "26191e4f-4f67-4dcf-a1d3-d06f279ddb6e",
-      "url": "/system6",
-      "path": "/system6",
-      "componentName": "System",
-      "meta": {
-        "title": "测试6",
-        "icon": "Folder",
-        "auth": []
-      },
-      "children": []
-    },
-    {
-      "id": "8ba31b42-b46a-4424-a0de-a65a30928df7",
-      "url": "/system7",
-      "path": "/system7",
-      "componentName": "System",
-      "meta": {
-        "title": "测试7",
-        "icon": "Folder",
-        "auth": []
-      },
-      "children": []
-    },
-    {
-      "id": "ac3c5cdb-156e-49d0-923f-2bde14d795a3",
-      "url": "/system1",
-      "path": "/system1",
-      "componentName": "System",
-      "meta": {
-        "title": "测试8",
-        "icon": "Compass",
         "auth": [],
         "modify": false
       },
