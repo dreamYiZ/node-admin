@@ -375,9 +375,9 @@ app.use((err, req, res, next) => {
   next();
 });
 
-// const host = '0.0.0.0';
 const port = 8081;
 const server = app.listen(port, () => {
+  console.log(process.env.NODE_ENV,"环境")
   const host = null; // server.address().address
   // const port = server.address().port;
   // console.log("应用实例，访问地址为 http://%s:%s", 'localhost', port)

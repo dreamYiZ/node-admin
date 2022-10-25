@@ -1,12 +1,10 @@
 {
   "dependencies": {
-    "@vercel/node": "^2.5.22",
     "express-jwt": "^6.0.0",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "lowdb": "^1.0.0",
-    "socket.io": "^4.5.1",
     "uuid": "^8.3.2"
   },
   "name": "server",
@@ -18,7 +16,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node app.js",
-    "dev": "NODE_ENV=development node app.js"
+    "dev": "NODE_ENV=development node app.js",
+    "pro": "NODE_ENV=production node app.js",
+    "app": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
