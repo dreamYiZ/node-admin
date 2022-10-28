@@ -7,8 +7,11 @@ var { v4: uuid } = require("uuid");
 // 生成token
 var jwt = require("jsonwebtoken");
 
+const url = require('url')
 const fs = require("fs");
 const path = require("path");
+const { downloadFilesByUrl, getFileByPath } = require("./utils/index")
+
 // 解析token
 var expressJwt = require("express-jwt");
 
@@ -59,6 +62,19 @@ app.get("/test", async (req, res, next) => {
   });
   next();
 });
+
+app.get("/downloadFile", async (req, res, next) => {
+  let { file_url } = req.query;
+  let path_url = downloadFilesByUrl(file_url)
+  let data = await getFileByPath(path_url)
+  console.log(data)
+  res.json({
+    code: 200,
+    msg: data,
+  });
+  next();
+});
+
 // 登录
 app.get("/login", async (req, res, next) => {
   let { username, password } = req.query;
