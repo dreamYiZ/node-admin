@@ -4,6 +4,11 @@ const path = require("path");
 const axios = require('axios')
 const progressStream = require("progress-stream");
 
+const bufferToBase64Url = (data, type) => {
+  const buffer = new Buffer(data, "binary");
+  return `data:image/${type};base64,` + buffer.toString("base64");
+};
+
 module.exports = {
   downloadFilesByUrl: (file_url) => {
     const cwd = process.cwd();
@@ -19,7 +24,7 @@ module.exports = {
       const fileStream = fs
         .createWriteStream(file_path_temp)
         .on("error", function (e) {
-          // console.error('error==>', e)
+          console.error('error==>', e)
         })
         .on("ready", function () {
           console.log("开始下载:", file_url);
@@ -51,7 +56,7 @@ module.exports = {
       });
     } else {
       let path_url = path.resolve(downloadDicPath, file_name)
-      // 已存在
+      console.log(path_url,"已存在")
       return path_url
     }
   },
@@ -70,5 +75,22 @@ module.exports = {
       type,
       fileContent,
     };
+  },
+  // 本地文件地址 to Base64
+  localFileToBase64: (url) => {
+    return new Promise((resolve, reject) => {
+      try {
+        fs.readFile(url, "binary", (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            const base64Url = bufferToBase64Url(data, getImageType(url));
+            resolve(base64Url);
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    });
   },
 };
