@@ -98,7 +98,8 @@
         "title": "聊天工作室",
         "icon": "ForkSpoon",
         "auth": [],
-        "modify": false
+        "modify": false,
+        "keep": true
       },
       "children": []
     },
