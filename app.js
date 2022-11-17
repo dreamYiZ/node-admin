@@ -10,6 +10,8 @@ var jwt = require("jsonwebtoken");
 const url = require('url')
 const fs = require("fs");
 const path = require("path");
+
+const { genTestUserSig } = require("./config/GenerateTestUserSig");
 const { downloadFilesByUrl, getFileByPath } = require("./utils/index")
 
 // 解析token
@@ -82,10 +84,12 @@ app.get("/login", async (req, res, next) => {
   if (username && password) {
     const user = db_user.get("user").find({ username, password }).value();
     if (user) {
+      const token = jwt.sign(user, SECRET_KEY, { expiresIn: 60 * 60 * 24 * 3 });
       res.setHeader("Access-Control-Expose-Headers", "x-token");
       // 注意默认情况 Token 必须以 Bearer+空格 开头
-      const token = jwt.sign(user, SECRET_KEY, { expiresIn: 60 * 60 * 24 * 3 });
       res.setHeader("X-token", "Bearer " + token);
+      const { SDKAppID, userSig } = genTestUserSig(username)
+      user.userSig = userSig
       res.json({
         code: 200,
         msg: "登录成功!",
