@@ -9,18 +9,10 @@ const db_menu = lowdb(menu);
 const { login } = require("../api/user");
 
 /* GET home page. */
-router.get('/home', function(req, res, next) {
-  res.json({
-    code: 200,
-    msg: "home",
-  });
-  next();
-});
-
 router.get("/test", (req, res, next) => {
   res.json({
     code: 200,
-    msg: "访问成功 home",
+    msg: "访问成功 test",
   });
   next();
 });

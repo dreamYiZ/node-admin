@@ -1,6 +1,8 @@
 var express = require("express");
 // 解析token
 var expressJwt = require("express-jwt");
+// 日志
+var logger = require("morgan");
 // 路由
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -8,9 +10,9 @@ var usersRouter = require("./routes/users");
 const url = require("url");
 const fs = require("fs");
 const path = require("path");
-const packageJSON = require('./package.json')
-const exec = require('child_process').exec
-const config = require('./utils/config.json')
+const packageJSON = require("./package.json");
+const exec = require("child_process").exec;
+const config = require("./utils/config.json");
 
 /**
  * Construct the server of NCM API.
@@ -37,6 +39,21 @@ async function consturctServer(moduleDefs) {
     }
     req.method === "OPTIONS" ? res.status(204).end() : next();
   });
+
+  /**
+   * 创建写入流（在追加模式下）
+   */
+  const accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
+    flags: "a",
+  });
+
+  // setup the logger
+  app.use(
+    logger(
+      "combined", // dev combined
+      { stream: accessLogStream }
+    )
+  );
 
   /**
    * Cookie Parser
@@ -68,7 +85,17 @@ async function consturctServer(moduleDefs) {
     expressJwt({
       secret: SECRET_KEY,
       algorithms: ["HS256"], //指定解析密文的算法
-    }).unless({ path: ["/login","/menu/query","/home", "/test", "/users/test", "/favicon.ico"] })
+    }).unless({
+      // 忽略项
+      path: [
+        "/login",
+        "/menu/query",
+        "/home",
+        "/test",
+        "/users/test",
+        "/favicon.ico",
+      ],
+    })
   );
 
   app.use("/", indexRouter);
