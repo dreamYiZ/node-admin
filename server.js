@@ -11,7 +11,7 @@ const url = require("url");
 const fs = require("fs");
 const path = require("path");
 const packageJSON = require("./package.json");
-const exec = require("child_process").exec;
+const { execFile, exec } = require('child_process');
 const config = require("./utils/config.json");
 
 /**
@@ -47,7 +47,9 @@ async function consturctServer(moduleDefs) {
     flags: "a",
   });
 
-  // setup the logger
+  /**
+   * 日志
+   */
   app.use(
     logger(
       "combined", // dev combined

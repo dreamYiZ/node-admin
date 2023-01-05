@@ -1,6 +1,15 @@
+// 文件系统
 const fs = require("fs");
+// 操作系统
+const os = require('os');
+// 网址
 const url = require('url')
+// 路径
 const path = require("path");
+// 实用工具
+const util = require("util");
+// 子进程
+const { execFile, exec } = require('child_process');
 const axios = require('axios')
 const progressStream = require("progress-stream");
 
@@ -8,6 +17,29 @@ const bufferToBase64Url = (data, type) => {
   const buffer = new Buffer(data, "binary");
   return `data:image/${type};base64,` + buffer.toString("base64");
 };
+
+// 执行 npm run build 命令
+;(function() {
+  // exec('npm -v', (error, stdout, stderr) => {
+  //   console.log(stdout)
+  //   if (!error) {
+  //     console.log("成功")
+  //     // 成功
+  //   } else {
+  //     console.log("失败")
+  //     // 失败
+  //   }
+  // });
+  // execFile("notepad",(error, stdout, stderr) => {
+  //   if (!error) {
+  //     console.log("成功")
+  //     // 成功
+  //   } else {
+  //     console.log("失败")
+  //     // 失败
+  //   }
+  // })
+})();
 
 module.exports = {
   downloadFilesByUrl: (file_url) => {
@@ -60,6 +92,7 @@ module.exports = {
       return path_url
     }
   },
+  // 同步检查给定路径中是​​否已存在文件
   checkFileExist: (path) => {
     return fs.existsSync(path);
   },

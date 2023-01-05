@@ -7,7 +7,7 @@ const user = new FileSync("./db/user.json");
 const db_user = lowdb(user); 
 const { genTestUserSig } = require("../utils/GenerateTestUserSig");
 const { SECRET_KEY } = require('../utils/config.json')
-
+const { downloadFilesByUrl } = require("../utils/index");
 module.exports = {
   login: async (req, res, next) => {
     let { username, password } = req.query;
