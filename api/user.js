@@ -6,7 +6,7 @@ var FileSync = require("lowdb/adapters/FileSync");
 const user = new FileSync("./db/user.json");
 const db_user = lowdb(user); 
 const { genTestUserSig } = require("../utils/GenerateTestUserSig");
-const SECRET_KEY = "7040575a-5ff5-4398-a410-d9c7b010f6e8";
+const { SECRET_KEY } = require('../utils/config.json')
 
 module.exports = {
   login: async (req, res, next) => {

@@ -8,6 +8,9 @@ var usersRouter = require("./routes/users");
 const url = require("url");
 const fs = require("fs");
 const path = require("path");
+const packageJSON = require('./package.json')
+const exec = require('child_process').exec
+const config = require('./utils/config.json')
 
 /**
  * Construct the server of NCM API.
@@ -60,12 +63,12 @@ async function consturctServer(moduleDefs) {
   /**
    * JWT
    */
-  const SECRET_KEY = "7040575a-5ff5-4398-a410-d9c7b010f6e8";
+  const { SECRET_KEY } = config;
   app.use(
     expressJwt({
       secret: SECRET_KEY,
       algorithms: ["HS256"], //指定解析密文的算法
-    }).unless({ path: ["/login", "/test", "/users/test", "/favicon.ico"] })
+    }).unless({ path: ["/login","/menu/query","/home", "/test", "/users/test", "/favicon.ico"] })
   );
 
   app.use("/", indexRouter);
