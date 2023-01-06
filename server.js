@@ -91,8 +91,6 @@ async function consturctServer(moduleDefs) {
       // 忽略项
       path: [
         "/login",
-        "/menu/query",
-        "/home",
         "/test",
         "/users/test",
         "/favicon.ico",
@@ -106,7 +104,7 @@ async function consturctServer(moduleDefs) {
   app.use((err, req, res, next) => {
     // 未经授权的错误
     if (err.name === "UnauthorizedError") {
-      res.status(401).send({ msg: "不合法的请求" });
+      res.status(401).send({ msg: "未登录" });
     }
     res.status(500).send("Internal Serverless Error");
     next();
