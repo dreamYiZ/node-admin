@@ -1,11 +1,15 @@
-var express = require("express");
+const express = require("express");
 // 解析token
-var expressJwt = require("express-jwt");
+const expressJwt = require("express-jwt");
+// 解析post请求
+const bodyParser = require('body-parser');
+// 文件上传
+const uploader = require('express-fileupload') 
 // 日志
-var logger = require("morgan");
+const logger = require("morgan");
 // 路由
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 
 const url = require("url");
 const fs = require("fs");
@@ -23,7 +27,7 @@ const config = require("./utils/config.json");
 async function consturctServer(moduleDefs) {
   const app = express();
   // app.set("trust proxy", true);
-
+  
   /**
    * CORS & Preflight request
    */
@@ -31,8 +35,11 @@ async function consturctServer(moduleDefs) {
     if (req.path !== "/" && !req.path.includes(".")) {
       res.set({
         // "Access-Control-Allow-Credentials": true,
+        // 设置允许跨域的域名，*代表允许任意域名跨域
         "Access-Control-Allow-Origin": req.headers.origin || "*",
+        // 允许的header类型
         "Access-Control-Allow-Headers": "authorization", //"X-Requested-With,Content-Type",
+        // 跨域允许的请求方式 
         "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
         "Content-Type": "application/json; charset=utf-8",
       });
@@ -66,14 +73,16 @@ async function consturctServer(moduleDefs) {
    */
   // app.use(express.json());
   // app.use(express.urlencoded({ extended: false }));
-
-  // app.use(fileUpload());
+  
+  app.use(uploader());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   /**
    * 设置静态文件目录 static
    */
   app.use(express.static(path.join(__dirname, "public")));
-
+  app.use('/download',express.static('download'));// 允许访问图片资源地址
   /**
    * Cache
    */
@@ -91,6 +100,8 @@ async function consturctServer(moduleDefs) {
       // 忽略项
       path: [
         "/login",
+        "/downloadFile",
+        "/download",
         "/test",
         "/users/test",
         "/favicon.ico",

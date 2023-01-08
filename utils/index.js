@@ -7,7 +7,7 @@ const url = require('url')
 // 路径
 const path = require("path");
 // 实用工具
-const util = require("util");
+const { inspect } = require("util");
 // 子进程
 const { execFile, exec } = require('child_process');
 const axios = require('axios')
@@ -43,14 +43,17 @@ const bufferToBase64Url = (data, type) => {
 
 module.exports = {
   downloadFilesByUrl: (file_url) => {
+    console.log(file_url,"file_url");
     const cwd = process.cwd();
     const downloadDicPath = path.resolve(cwd, "./download/");
     if (!fs.existsSync(downloadDicPath)) {
+      // 创建文件目录 download
       fs.mkdirSync(downloadDicPath);
     }
     const file_name = url.parse(file_url).pathname.split("/").pop();
     const file_path = path.resolve(downloadDicPath, file_name);
     const file_path_temp = `${file_path}.tmp`;
+    console.log(file_path,"file_path")
     if (!fs.existsSync(file_path)) {
       // 创建写入流
       const fileStream = fs

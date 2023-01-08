@@ -1,7 +1,16 @@
 var express = require("express");
 var router = express.Router();
+var _ = require("lodash");
 // 生成唯一id
 var { v4: uuid } = require("uuid");
+// 实用工具
+const { inspect } = require("util");
+const {
+  existsSync,
+  appendFileSync,
+  writeFileSync,
+} = require("fs");;
+const { resolve } = require("path");
 // 文件数据库
 var lowdb = require("lowdb");
 var FileSync = require("lowdb/adapters/FileSync");
@@ -12,6 +21,7 @@ const db_menu = lowdb(menu);
 // 角色表
 const db_role = lowdb(role);
 const { login } = require("../api/user");
+const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
 
 /* GET test */
 router.get("/test", (req, res, next) => {
@@ -19,11 +29,34 @@ router.get("/test", (req, res, next) => {
     code: 200,
     msg: "访问成功 test",
   });
-  next();
 });
 
 /* GET 登录 */
 router.get("/login", login);
+
+/* POST 文件上传 */
+router.post("/downloadFile", async (req, res, next) => {
+  const { file } = req.files // 文件对象
+  if(!file){
+    res.json({
+      code: 1001,
+      msg: "err",
+    });
+    return;
+  }
+  const filePath = resolve(__dirname,'../download/',file.name)
+  writeFileSync(filePath,file.data);
+
+  // console.log(path_url)
+  console.log(file,"file")
+  res.json({
+    code: 200,
+    msg: 123,
+    data:{
+      file_url: 'http://localhost:8081/download/' + file.name
+    }
+  });
+});
 
 /* GET 返回菜单列表 */
 router.get("/menu/query", async (req, res, next) => {
@@ -89,6 +122,24 @@ router.get("/menu/delete", async (req, res, next) => {
         .write();
       db_menu.get("menu").remove({ id }).write();
     });
+    res.json(db_menu.get("menu").value());
+  } else {
+    res.json({ code: 400, msg: "参数不合法" });
+  }
+  next();
+});
+
+/* GET 更新菜单 */
+router.get("/menu/update", async (req, res, next) => {
+  console.dir(req.query)
+  if (_.has(req.query, "id", "path", "title", "icon")) {
+    let { id, path, title, icon } = req.query;
+    db_menu
+      .get("menu")
+      .find({ id })
+      .assign({ path, meta: { title, icon, auth: [], modify: false } })
+      .write();
+    // componentName
     res.json(db_menu.get("menu").value());
   } else {
     res.json({ code: 400, msg: "参数不合法" });
