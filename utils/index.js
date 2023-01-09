@@ -42,6 +42,7 @@ const bufferToBase64Url = (data, type) => {
 })();
 
 module.exports = {
+  // 文件上传 url
   downloadFilesByUrl: (file_url) => {
     console.log(file_url,"file_url");
     const cwd = process.cwd();

@@ -10,7 +10,10 @@ const {
   appendFileSync,
   writeFileSync,
 } = require("fs");;
-const { resolve } = require("path");
+const { 
+  resolve,
+  extname
+ } = require("path");
 // 文件数据库
 var lowdb = require("lowdb");
 var FileSync = require("lowdb/adapters/FileSync");
@@ -22,7 +25,8 @@ const db_menu = lowdb(menu);
 const db_role = lowdb(role);
 const { login } = require("../api/user");
 const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
-
+console.log(process.env.NODE_ENV)
+const production = process.env.NODE_ENV == "production" ? "pro" : 'dev'
 /* GET test */
 router.get("/test", (req, res, next) => {
   res.json({
@@ -35,27 +39,48 @@ router.get("/test", (req, res, next) => {
 router.get("/login", login);
 
 /* POST 文件上传 */
-router.post("/downloadFile", async (req, res, next) => {
-  const { file } = req.files // 文件对象
-  if(!file){
-    res.json({
-      code: 1001,
-      msg: "err",
-    });
-    return;
-  }
-  const filePath = resolve(__dirname,'../download/',file.name)
-  writeFileSync(filePath,file.data);
-
-  // console.log(path_url)
-  console.log(file,"file")
-  res.json({
-    code: 200,
-    msg: 123,
-    data:{
-      file_url: 'http://localhost:8081/download/' + file.name
+router.post("/upload_files", async (req, res, next) => {
+    const { file } = req.files || {} // 文件对象
+    if(!file){
+      res.json({
+        code: 1001,
+        msg: "请选择文件!",
+      });
+      return;
     }
-  });
+    const {  
+      name,
+      type,
+      size,
+      fileName,
+      uploadedSize,
+    } = req.body;
+    console.log(req.body)
+    const filename = fileName // + extname(name)
+    const filePath = resolve(__dirname,'../download/',filename)
+    let files_url = {
+      dev :'http://localhost:8081/download/',
+      pro :'https://service-2v8ie360-1307934606.gz.apigw.tencentcs.com/release/download/'
+    }
+
+    // if(uploadedSize !== '0'){
+    //   if(!existsSync(filePath)){
+    //     res.send({
+    //       code: 1003,
+    //       msg: ""
+    //     })
+    //     return
+    //   }
+    //   appendFileSync(filePath,file.data)
+    // }
+    writeFileSync(filePath, file.data);
+    res.json({
+      code: 200,
+      msg: 123,
+      data:{
+        file_url: files_url[production] + filename
+      }
+    });
 });
 
 /* GET 返回菜单列表 */

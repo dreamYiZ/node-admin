@@ -7,7 +7,7 @@
     "start": "node app.js",
     "build": "node tsc",
     "dev": "node app.js",
-    "prod": "node app.js",
+    "prod": "set NODE_ENV=production && nodemon app.js",
     "app": "nodemon app.js",
     "lint": "eslint \"**/*.{js,ts}\"",
     "pkg": "pkg . --output=bin/node-admin",

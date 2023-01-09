@@ -74,15 +74,15 @@ async function consturctServer(moduleDefs) {
   // app.use(express.json());
   // app.use(express.urlencoded({ extended: false }));
   
-  app.use(uploader());
-  app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
+  app.use(uploader());
 
   /**
    * 设置静态文件目录 static
    */
   app.use(express.static(path.join(__dirname, "public")));
-  app.use('/download',express.static('download'));// 允许访问图片资源地址
+  app.use('/download',express.static('download'));// 允许访问文件资源地址
   /**
    * Cache
    */
@@ -100,7 +100,7 @@ async function consturctServer(moduleDefs) {
       // 忽略项
       path: [
         "/login",
-        "/downloadFile",
+        "/upload_files",
         "/download",
         "/test",
         "/users/test",
