@@ -16,7 +16,8 @@ const fs = require("fs");
 const path = require("path");
 const packageJSON = require("./package.json");
 const { execFile, exec } = require('child_process');
-const config = require("./utils/config.json");
+
+const { SECRET_KEY } = require("./config");
 
 /**
  * Construct the server of NCM API.
@@ -91,7 +92,6 @@ async function consturctServer(moduleDefs) {
   /**
    * JWT
    */
-  const { SECRET_KEY } = config;
   app.use(
     expressJwt({
       secret: SECRET_KEY,
@@ -115,7 +115,7 @@ async function consturctServer(moduleDefs) {
   app.use((err, req, res, next) => {
     // 未经授权的错误
     if (err.name === "UnauthorizedError") {
-      res.status(401).send({ msg: "未登录" });
+      res.status(401).send({ msg: "未授权!!!" });
     }
     res.status(500).send("Internal Serverless Error");
     next();

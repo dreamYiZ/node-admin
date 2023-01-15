@@ -25,7 +25,7 @@ const db_menu = lowdb(menu);
 const db_role = lowdb(role);
 const { login } = require("../api/user");
 const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
-console.log(process.env.NODE_ENV)
+
 const production = process.env.NODE_ENV == "production" ? "pro" : 'dev'
 /* GET test */
 router.get("/test", (req, res, next) => {
