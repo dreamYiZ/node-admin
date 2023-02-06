@@ -90,10 +90,10 @@
     },
     {
       "id": "3936c425-1286-49c3-bc92-5b364b9f4264",
-      "url": "/editor",
-      "path": "/editor",
-      "name": "editor",
-      "componentName": "Editor",
+      "url": "/chatstudio",
+      "path": "/chatstudio",
+      "name": "chatstudio",
+      "componentName": "ChatStudio",
       "meta": {
         "title": "聊天工作室",
         "icon": "ForkSpoon",
