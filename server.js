@@ -21,7 +21,6 @@ const { SECRET_KEY } = require("./config");
 
 /**
  * Construct the server of NCM API.
- *
  * @param {ModuleDefinition[]} [moduleDefs] Customized module definitions [advanced]
  * @returns {Promise<import("express").Express>} The server instance.
  */
@@ -49,7 +48,7 @@ async function consturctServer(moduleDefs) {
   });
 
   /**
-   * 创建写入流（在追加模式下）
+   * 创建写入流（调用日志）
    */
   const accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
     flags: "a",
@@ -147,7 +146,9 @@ async function serveNcmApi(options) {
     constructServerSubmission,
   ]);
 
-  /** @type {import('express').Express & ExpressExtension} */
+  /** 
+   * @type {import('express').Express & ExpressExtension} 
+   */
   const appExt = app;
   appExt.server = app.listen(port, host, () => {
     console.log(`server running @ http://${host ? host : "localhost"}:${port}`);
