@@ -4,7 +4,7 @@ const expressJwt = require("express-jwt");
 // 解析post请求
 const bodyParser = require('body-parser');
 // 文件上传
-const uploader = require('express-fileupload') 
+const uploader = require('express-fileupload')
 // 日志
 const logger = require("morgan");
 // 路由
@@ -27,7 +27,7 @@ const { SECRET_KEY } = require("./config");
 async function consturctServer(moduleDefs) {
   const app = express();
   // app.set("trust proxy", true);
-  
+
   /**
    * CORS & Preflight request
    */
@@ -73,7 +73,7 @@ async function consturctServer(moduleDefs) {
    */
   // app.use(express.json());
   // app.use(express.urlencoded({ extended: false }));
-  
+
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(uploader());
@@ -82,7 +82,7 @@ async function consturctServer(moduleDefs) {
    * 设置静态文件目录 static
    */
   app.use(express.static(path.join(__dirname, "public")));
-  app.use('/download',express.static('download'));// 允许访问文件资源地址
+  app.use('/download', express.static('download'));// 允许访问文件资源地址
   /**
    * Cache
    */
