@@ -24,6 +24,8 @@ const db_menu = lowdb(menu);
 // 角色表
 const db_role = lowdb(role);
 const { login } = require("../api/user");
+const { text } = require("../api/chatGpt");
+
 const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
 
 const production = process.env.NODE_ENV == "production" ? "pro" : 'dev'

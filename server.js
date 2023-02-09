@@ -48,7 +48,7 @@ async function consturctServer(moduleDefs) {
   });
 
   /**
-   * 创建写入流（调用日志）
+   * 创建写入流（日志）
    */
   const accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
     flags: "a",
