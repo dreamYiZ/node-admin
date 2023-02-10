@@ -50,19 +50,19 @@ async function consturctServer(moduleDefs) {
   /**
    * 创建写入流（日志）
    */
-  const accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
-    flags: "a",
-  });
+  // const accessLogStream = fs.createWriteStream(__dirname + "/access.log", {
+  //   flags: "a",
+  // });
 
   /**
    * 日志
    */
-  app.use(
-    logger(
-      "combined", // dev combined
-      { stream: accessLogStream }
-    )
-  );
+  // app.use(
+  //   logger(
+  //     "combined", // dev combined
+  //     { stream: accessLogStream }
+  //   )
+  // );
 
   /**
    * Cookie Parser

@@ -19,7 +19,7 @@ const bufferToBase64Url = (data, type) => {
 };
 
 // 执行 npm run build 命令
-;(function() {
+; (function () {
   // exec('npm -v', (error, stdout, stderr) => {
   //   console.log(stdout)
   //   if (!error) {
@@ -44,7 +44,7 @@ const bufferToBase64Url = (data, type) => {
 module.exports = {
   // 文件上传 url
   downloadFilesByUrl: (file_url) => {
-    console.log(file_url,"file_url");
+    console.log(file_url, "file_url");
     const cwd = process.cwd();
     const downloadDicPath = path.resolve(cwd, "./download/");
     if (!fs.existsSync(downloadDicPath)) {
@@ -54,7 +54,7 @@ module.exports = {
     const file_name = url.parse(file_url).pathname.split("/").pop();
     const file_path = path.resolve(downloadDicPath, file_name);
     const file_path_temp = `${file_path}.tmp`;
-    console.log(file_path,"file_path")
+    console.log(file_path, "file_path")
     if (!fs.existsSync(file_path)) {
       // 创建写入流
       const fileStream = fs
@@ -92,7 +92,7 @@ module.exports = {
       });
     } else {
       let path_url = path.resolve(downloadDicPath, file_name)
-      console.log(path_url,"已存在")
+      console.log(path_url, "已存在")
       return path_url
     }
   },
