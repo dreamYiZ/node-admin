@@ -10,6 +10,7 @@ const logger = require("morgan");
 // 路由
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const callbackRouter = require("./routes/callback"); // im回调相关
 
 const url = require("url");
 const fs = require("fs");
@@ -104,12 +105,14 @@ async function consturctServer(moduleDefs) {
         "/test",
         "/users/test",
         "/favicon.ico",
+        "/callback/send-message-cd"
       ],
     })
   );
 
   app.use("/", indexRouter);
   app.use("/users", usersRouter);
+  app.use("/callback", callbackRouter);
 
   app.use((err, req, res, next) => {
     // 未经授权的错误
