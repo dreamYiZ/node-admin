@@ -21,6 +21,26 @@ const { execFile, exec } = require('child_process');
 const { SECRET_KEY } = require("./config");
 
 /**
+ * Check if the version of this API is latest.
+ *
+ * @returns {Promise<VersionCheckResult>} If true, this API is up-to-date;
+ * otherwise, this API should be upgraded and you would
+ * need to notify users to upgrade it manually.
+ */
+async function checkVersion() {
+  return new Promise((resolve) => {
+    exec('npm info XXX', (err, stdout) => {
+      if (!err) {
+        console.log(stdout)
+      }
+    })
+    resolve({
+      status: true,
+    })
+  })
+}
+
+/**
  * Construct the server of NCM API.
  * @param {ModuleDefinition[]} [moduleDefs] Customized module definitions [advanced]
  * @returns {Promise<import("express").Express>} The server instance.
@@ -74,7 +94,6 @@ async function consturctServer(moduleDefs) {
    */
   // app.use(express.json());
   // app.use(express.urlencoded({ extended: false }));
-
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(uploader());
@@ -84,10 +103,6 @@ async function consturctServer(moduleDefs) {
    */
   app.use(express.static(path.join(__dirname, "public")));
   app.use('/download', express.static('download'));// 允许访问文件资源地址
-  /**
-   * Cache
-   */
-  // app.use(cache("2 minutes", (_, res) => res.statusCode === 200));
 
   /**
    * JWT
@@ -133,18 +148,22 @@ async function serveNcmApi(options) {
   const port = Number(options.port || process.env.PORT || "8081");
   const host = options.host || process.env.HOST || "";
 
-  //   const checkVersionSubmission =
-  //     options.checkVersion &&
-  //     checkVersion().then(({ npmVersion, ourVersion, status }) => {
-  //       if (status == VERSION_CHECK_RESULT.NOT_LATEST) {
-  //         console.log(
-  //           `最新版本: ${npmVersion}, 当前版本: ${ourVersion}, 请及时更新`
-  //         );
-  //       }
-  //     });
+  const checkVersionSubmission =
+    options.checkVersion &&
+    checkVersion().then(({ npmVersion, ourVersion, status }) => {
+      if (status == VERSION_CHECK_RESULT.NOT_LATEST) {
+        console.log(
+          `最新版本: ${npmVersion}, 当前版本: ${ourVersion}, 请及时更新`
+        );
+      }
+    });
+
   const constructServerSubmission = consturctServer(options.moduleDefs);
 
-  const [app] = await Promise.all([
+  const [
+    // _,
+    app
+  ] = await Promise.all([
     // checkVersionSubmission,
     constructServerSubmission,
   ]);

@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 async function start() {
   require('./server').serveNcmApi({
-    checkVersion: true,
+    checkVersion: false,
+    // port: 8081,
+    // host: '',
+    // moduleDefs: ''
   })
 }
 start()
