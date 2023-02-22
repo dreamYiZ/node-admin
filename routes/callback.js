@@ -9,7 +9,7 @@ function openai(){
     const axios = require('axios');
 
     const openaiApiKey = '';
-    const prompt = 'Once upon a time';
+    const prompt = '你好！';
     const model = 'text-davinci-002';
     const temperature = 0.5;
     const maxTokens = 50;
@@ -40,13 +40,13 @@ router.post('/send-message-cd', async (req, res) => {
     // 在这里编写将消息转发给接收者的逻辑
     // 这里只是一个示例，输出一条日志来表示接口已经被调用
     console.log(`Sending message from ${req}`);
-
+    // openai()
 //    const sender = req.body.sender;
 //    const receiver = req.body.receiver;
 //    const message = req.body.message;
 //     console.log({sender,receiver,message})
     // 返回成功响应
-    res.status(200).send('Message sent successfully!');
+    // res.status(200).send('Message sent successfully!');
 });
 
 

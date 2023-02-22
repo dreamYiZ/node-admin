@@ -7,14 +7,19 @@ const bodyParser = require('body-parser');
 const uploader = require('express-fileupload')
 // 日志
 const logger = require("morgan");
+// WebSocket
+const socketio = require('socket.io');
 // 路由
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const callbackRouter = require("./routes/callback"); // im回调相关
 
+const cors = require('cors');
 const url = require("url");
 const fs = require("fs");
+const http = require('http');
 const path = require("path");
+
 const packageJSON = require("./package.json");
 const { execFile, exec } = require('child_process');
 
@@ -52,6 +57,7 @@ async function consturctServer(moduleDefs) {
   /**
    * CORS & Preflight request
    */
+  // app.use(cors())
   app.use((req, res, next) => {
     if (req.path !== "/" && !req.path.includes(".")) {
       res.set({
@@ -59,7 +65,7 @@ async function consturctServer(moduleDefs) {
         // 设置允许跨域的域名，*代表允许任意域名跨域
         "Access-Control-Allow-Origin": req.headers.origin || "*",
         // 允许的header类型
-        "Access-Control-Allow-Headers": "authorization", //"X-Requested-With,Content-Type",
+        "Access-Control-Allow-Headers": "Content-Type, authorization", //"X-Requested-With,Content-Type",
         // 跨域允许的请求方式 
         "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
         "Content-Type": "application/json; charset=utf-8",

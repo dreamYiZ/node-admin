@@ -17,14 +17,6 @@
       "isDefaultRole": true
     },
     {
-      "id": "6b2d9d87-e1b1-4584-bf7b-f10852794e4a",
-      "roleName": "黄泳康",
-      "info": "系统管理员",
-      "createTime": 1621480190410,
-      "updateTime": 1621480194410,
-      "isDefaultRole": true
-    },
-    {
       "id": "390ff205-f85e-4fde-8344-405fc9f42899",
       "roleName": "王杰",
       "info": "管理员",
@@ -62,22 +54,6 @@
       "info": "普通用户",
       "createTime": 1652260796495,
       "updateTime": 1652262490210,
-      "isDefaultRole": false
-    },
-    {
-      "id": "46356e0b-b8db-409f-be9d-648dcbc5cd5d",
-      "roleName": "金文轩",
-      "info": "普通用户",
-      "createTime": 1652261654021,
-      "updateTime": 1652262506544,
-      "isDefaultRole": false
-    },
-    {
-      "id": "3cf7f76e-723c-45fc-a9d2-8c0be8816d42",
-      "roleName": "徐奥星",
-      "info": "普通用户",
-      "createTime": 1652262522027,
-      "updateTime": 1652262522027,
       "isDefaultRole": false
     },
     {
@@ -145,14 +121,6 @@
       "isDefaultRole": false
     },
     {
-      "id": "3e6df460-bd3f-4786-8cd3-e984dfae2764",
-      "roleName": "吴叶玲",
-      "info": "普通用户",
-      "createTime": 1652263289329,
-      "updateTime": 1652263379354,
-      "isDefaultRole": false
-    },
-    {
       "id": "ddc5e0a3-ab1b-436c-90c1-52d33476c4cb",
       "roleName": "汪欣艳",
       "info": "管理员",
@@ -166,14 +134,6 @@
       "info": "普通用户",
       "createTime": 1652263544625,
       "updateTime": 1652263544625,
-      "isDefaultRole": false
-    },
-    {
-      "id": "f4b5dc3d-ae7b-4602-aca2-e99aeee5b760",
-      "roleName": "曾静怡",
-      "info": "普通用户",
-      "createTime": 1652263578348,
-      "updateTime": 1652263578348,
       "isDefaultRole": false
     },
     {
