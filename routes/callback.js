@@ -6,7 +6,7 @@ var router = express.Router();
 //     res.status(200).send('OK');
 // });
 function openai(){
-    const axios = require('axios');
+    // const axios = require('axios');
 
     const openaiApiKey = '';
     const prompt = '你好！';
@@ -14,26 +14,26 @@ function openai(){
     const temperature = 0.5;
     const maxTokens = 50;
 
-    axios.post(
-        'https://api.openai.com/v1/engines/' + model + '/completions',
-        {
-            prompt: prompt,
-            temperature: temperature,
-            max_tokens: maxTokens
-        },
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + openaiApiKey
-            }
-        }
-    )
-        .then(response => {
-            console.log(response.data.choices[0].text);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    // axios.post(
+    //     'https://api.openai.com/v1/engines/' + model + '/completions',
+    //     {
+    //         prompt: prompt,
+    //         temperature: temperature,
+    //         max_tokens: maxTokens
+    //     },
+    //     {
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': 'Bearer ' + openaiApiKey
+    //         }
+    //     }
+    // )
+    //     .then(response => {
+    //         console.log(response.data.choices[0].text);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     });
 }
 
 router.post('/send-message-cd', async (req, res) => {

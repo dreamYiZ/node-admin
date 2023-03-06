@@ -10,7 +10,7 @@ const path = require("path");
 const { inspect } = require("util");
 // 子进程
 const { execFile, exec } = require('child_process');
-const axios = require('axios')
+// const axios = require('axios')
 const progressStream = require("progress-stream");
 
 const bufferToBase64Url = (data, type) => {
@@ -71,25 +71,25 @@ module.exports = {
           console.log("文件下载完成:", file_path);
         });
       // 请求文件
-      axios({
-        method: "get",
-        url: file_url,
-        responseType: "stream",
-      }).then((response) => {
-        //获取请求头中的文件大小数据
-        let fsize = response.headers["content-length"];
-        //创建进度
-        let str = progressStream({
-          length: fsize,
-          time: 100 /* ms */,
-        });
-        // 下载进度
-        str.on("progress", function (progressData) {
-          let percentage = Math.round(progressData.percentage);
-          console.log(percentage + "%");
-        });
-        response.data.pipe(str).pipe(fileStream);
-      });
+      // axios({
+      //   method: "get",
+      //   url: file_url,
+      //   responseType: "stream",
+      // }).then((response) => {
+      //   //获取请求头中的文件大小数据
+      //   let fsize = response.headers["content-length"];
+      //   //创建进度
+      //   let str = progressStream({
+      //     length: fsize,
+      //     time: 100 /* ms */,
+      //   });
+      //   // 下载进度
+      //   str.on("progress", function (progressData) {
+      //     let percentage = Math.round(progressData.percentage);
+      //     console.log(percentage + "%");
+      //   });
+      //   response.data.pipe(str).pipe(fileStream);
+      // });
     } else {
       let path_url = path.resolve(downloadDicPath, file_name)
       console.log(path_url, "已存在")
