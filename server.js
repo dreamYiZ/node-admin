@@ -10,9 +10,9 @@ const logger = require("morgan");
 // WebSocket
 const socketio = require('socket.io');
 // 路由
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const callbackRouter = require("./routes/callback"); // im回调相关
+// const indexRouter = require("./routes/index");
+// const usersRouter = require("./routes/users");
+// const callbackRouter = require("./routes/callback"); // im回调相关
 
 const cors = require('cors');
 const url = require("url");
@@ -131,9 +131,9 @@ async function consturctServer(moduleDefs) {
     })
   );
 
-  app.use("/", indexRouter);
-  app.use("/users", usersRouter);
-  app.use("/callback", callbackRouter);
+  // app.use("/", indexRouter);
+  // app.use("/users", usersRouter);
+  // app.use("/callback", callbackRouter);
 
   app.use((err, req, res, next) => {
     // 未经授权的错误

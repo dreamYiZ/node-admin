@@ -10,7 +10,7 @@
     "app": "nodemon app.js",
     "lint": "eslint \"**/*.{js}\"",
     "lint-fix": "eslint --fix \"**/*.{js}\"",
-    "build": "pkg --out-dir dist --targets node14-macos-x64 --assets ./db ./app.js",
+    "build": "pkg . -t node14-win-x64 -o app --public",
     "pkgwin": "pkg . -t node14-win-x64 -o app",
     "pkglinux": "pkg . -t node14-linux-x64 -o app",
     "pkgmacos": "pkg . -t node14-macos-x64 -o app --public"
@@ -46,7 +46,7 @@
     "eslint-plugin-import": "^2.25.2",
     "express": "^4.17.1"
   },
-  "bin": "./test.js",
+  "bin": "./index.js",
   "pkg": {
     "scripts": "module/*.js",
     "targets": [
