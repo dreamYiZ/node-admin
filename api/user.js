@@ -2,8 +2,13 @@
 var jwt = require("jsonwebtoken");
 // 文件数据库
 var lowdb = require("lowdb");
+const path = require('path');
 var FileSync = require("lowdb/adapters/FileSync");
-const user = new FileSync("./db/user.json");
+// 获取数据文件的路径
+const dbUser = path.resolve(__dirname, '../db/user.json');
+const user = new FileSync(dbUser);
+// const user = new FileSync("./db/user.json");
+
 const db_user = lowdb(user);
 const { genTestUserSig } = require("../utils/GenerateTestUserSig");
 const { SECRET_KEY } = require("../config");
@@ -12,6 +17,7 @@ const { downloadFilesByUrl } = require("../utils/index");
 // var TLSSigAPIv2 = require('tls-sig-api-v2');
 // var api = new TLSSigAPIv2.Api(1400000000, "5bd2850fff3ecb11d7c805251c51ee463a25727bddc2385f3fa8bfee1bb93b5e");
 // var sig = api.genSig("xiaojun", 86400 * 180);
+
 
 /**
  * 签名过期时间，建议不要设置的过短

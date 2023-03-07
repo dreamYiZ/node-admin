@@ -17,14 +17,18 @@ const {
 // 文件数据库
 var lowdb = require("lowdb");
 var FileSync = require("lowdb/adapters/FileSync");
-const menu = new FileSync("./db/menu.json");
-const role = new FileSync("./db/role.json");
+const dbMenu = resolve(__dirname, '../db/menu.json');
+const dbRole = resolve(__dirname, '../db/role.json');
+
+const menu = new FileSync(dbMenu);
+const role = new FileSync(dbRole);
+
 // 菜单表
 const db_menu = lowdb(menu);
 // 角色表
 const db_role = lowdb(role);
 const { login } = require("../api/user");
-// const { text } = require("../api/chatGpt");
+
 
 const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
 
