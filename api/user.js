@@ -1,13 +1,12 @@
 // 生成token
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 // 文件数据库
-var lowdb = require("lowdb");
+const lowdb = require("lowdb");
 const path = require('path');
-var FileSync = require("lowdb/adapters/FileSync");
+const FileSync = require("lowdb/adapters/FileSync");
 // 获取数据文件的路径
 const dbUser = path.resolve(__dirname, '../db/user.json');
 const user = new FileSync(dbUser);
-// const user = new FileSync("./db/user.json");
 
 const db_user = lowdb(user);
 const { genTestUserSig } = require("../utils/GenerateTestUserSig");
