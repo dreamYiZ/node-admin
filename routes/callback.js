@@ -1,10 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-// router.post('*', (req, res) => {
-//     console.log('Received callback:', req.body);
-//     res.status(200).send('OK');
-// });
 function openai(){
     // const axios = require('axios');
 
@@ -41,13 +37,12 @@ router.post('/send-message-cd', async (req, res) => {
     // 这里只是一个示例，输出一条日志来表示接口已经被调用
     console.log(`Sending message from ${req}`);
     // openai()
-//    const sender = req.body.sender;
-//    const receiver = req.body.receiver;
-//    const message = req.body.message;
-//     console.log({sender,receiver,message})
+    //    const sender = req.body.sender;
+    //    const receiver = req.body.receiver;
+    //    const message = req.body.message;
+    //     console.log({sender,receiver,message})
     // 返回成功响应
     // res.status(200).send('Message sent successfully!');
 });
-
 
 module.exports = router;

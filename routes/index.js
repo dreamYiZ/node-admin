@@ -9,8 +9,8 @@ const {
   existsSync,
   appendFileSync,
   writeFileSync,
-} = require("fs");;
-const { 
+} = require("fs");
+const {
   resolve,
   extname
  } = require("path");
@@ -28,7 +28,6 @@ const db_menu = lowdb(menu);
 // 角色表
 const db_role = lowdb(role);
 const { login } = require("../api/user");
-
 
 const { downloadFilesByUrl, getFileByPath } = require("../utils/index")
 
@@ -188,5 +187,16 @@ router.get("/role/query", async (req, res, next) => {
   });
   next();
 });
+
+/* GET 回调相关 */
+router.get("/callback", async (req, res, next) => {
+  console.log(req.body)
+  res.json({
+    code: 200,
+    msg: "ok",
+    result: "测试",
+  });
+});
+
 
 module.exports = router;
